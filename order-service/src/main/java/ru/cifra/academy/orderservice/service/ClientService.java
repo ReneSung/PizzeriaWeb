@@ -11,6 +11,7 @@ import ru.cifra.academy.orderservice.repository.ClientRepository;
 public class ClientService {
     private final ClientRepository clientRepository;
 
+    // Регистрация пользователя
     public Client registerClient(ClientRegistrationRequest request) {
         clientRepository.findByPhoneNumber(request.getPhoneNumber()).ifPresent(client -> {
             throw new RuntimeException("User with phone number already exists");

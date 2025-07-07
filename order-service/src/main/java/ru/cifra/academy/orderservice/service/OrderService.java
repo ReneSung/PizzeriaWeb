@@ -24,6 +24,7 @@ public class OrderService {
     private final OrderStatusRepository statusRepository;
     private final DishInfoProvider dishInfoProvider;
 
+    // Создание заказа
     public Order createOrder(OrderRequest request) {
         Client client = clientRepository.findById(request.getClientId())
                 .orElseThrow(() -> new RuntimeException("Client not found"));
@@ -52,6 +53,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    // создание новго статуса заказа
     public OrderStatus createStatus(OrderStatusRequest request) {
         if (statusRepository.existsByCode(request.getCode())) {
             throw new RuntimeException("Status with code '" + request.getCode() + "' already exists");
@@ -63,4 +65,7 @@ public class OrderService {
         return statusRepository.save(status);
     }
 
+    public List<Order> findAl() {
+        return orderRepository.findAll();
+    }
 }

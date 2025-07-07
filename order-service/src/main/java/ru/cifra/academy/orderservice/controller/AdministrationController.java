@@ -6,22 +6,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.cifra.academy.orderservice.dto.ClientRegistrationRequest;
 import ru.cifra.academy.orderservice.dto.OrderStatusRequest;
-import ru.cifra.academy.orderservice.entity.Client;
 import ru.cifra.academy.orderservice.entity.OrderStatus;
-import ru.cifra.academy.orderservice.service.ClientService;
 import ru.cifra.academy.orderservice.service.OrderService;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/api/administration")
 @RequiredArgsConstructor
-public class ClientController {
-    private final ClientService clientService;
-
-    @PostMapping("/register")
-    public ResponseEntity<Client> register(@RequestBody ClientRegistrationRequest request) {
-        Client client = clientService.registerClient(request);
-        return ResponseEntity.ok(client);
+public class AdministrationController {
+    private final OrderService orderService;
+    @PostMapping("/status")
+    public ResponseEntity<OrderStatus> createOrderStatus(@RequestBody OrderStatusRequest request) {
+        return ResponseEntity.ok(orderService.createStatus(request));
     }
 }
